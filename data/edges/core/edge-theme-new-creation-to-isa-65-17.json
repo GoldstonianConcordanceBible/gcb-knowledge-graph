@@ -1,0 +1,9 @@
+{
+  "kind": "edge",
+  "from_id": "theme:new-creation",
+  "to_id": "bible:isaiah:65:17",
+  "relation": "theme_of",
+  "weight": 0.85,
+  "evidence": "Isaiah 65:17 explicitly frames new heavens and new earth.",
+  "created_at": "2026-03-04T00:00:00Z"
+}
