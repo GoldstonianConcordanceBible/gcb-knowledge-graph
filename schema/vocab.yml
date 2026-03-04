@@ -1,0 +1,41 @@
+gcb_layer:
+  - Mirror
+  - Water
+  - Fire
+
+node_types:
+  - scripture_book
+  - scripture_chapter
+  - scripture_verse
+  - theme
+  - person
+  - place
+  - work
+  - course
+  - playlist
+  - video
+
+relation_types:
+  - contains
+  - covers
+  - cites
+  - cross_ref
+  - alludes_to
+  - fulfills
+  - parallels
+  - theme_of
+  - teaches
+  - supports
+  - contradicts
+  - context_for
+
+traditions:
+  - Torah
+  - Prophets
+  - Writings
+  - Gospels
+  - Epistles
+  - Apocalypse
+  - SecondTemple
+  - DSS
+  - Enochic
