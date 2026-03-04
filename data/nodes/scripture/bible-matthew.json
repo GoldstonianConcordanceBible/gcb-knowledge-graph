@@ -1,0 +1,19 @@
+{
+  "kind": "node",
+  "id": "bible:matthew",
+  "type": "scripture_book",
+  "title": "Matthew",
+  "description": "Gospel of Matthew (Gospels). Presents Jesus as Messiah and fulfillment of Scripture; emphasizes kingdom teaching.",
+  "sources": ["https://www.biblegateway.com/passage/?search=Matthew+1&version=ESV"],
+  "tags": ["Gospels", "Messiah", "kingdom", "discipleship"],
+  "gcb_layer": "Water",
+  "tradition": "Gospels",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0",
+  "meta": {
+    "abbr": "Matt",
+    "order": 40,
+    "testament": "New"
+  }
+}
