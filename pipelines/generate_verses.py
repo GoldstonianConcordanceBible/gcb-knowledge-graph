@@ -3,7 +3,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
-COUNTS_PATH = ROOT / "pipelines" / "verse_counts_min.json"
+COUNTS_PATH = ROOT / "pipelines" / "verse_counts.json"
+BOOK_META_PATH = ROOT / "pipelines" / "book_meta.json"
 OUT_DIR = ROOT / "data" / "nodes" / "scripture"
 
 LICENSE = "CC-BY-4.0"
@@ -17,11 +18,20 @@ def write_json(path: Path, obj: dict):
 
 def main():
     counts = json.loads(COUNTS_PATH.read_text(encoding="utf-8"))
+    book_meta = json.loads(BOOK_META_PATH.read_text(encoding="utf-8"))
     ts = utc_now_z()
 
     created = 0
+    skipped = 0
 
     for book_slug, chapter_counts in counts.items():
+        if not chapter_counts:
+            skipped += 1
+            continue
+
+        meta = book_meta.get(book_slug, {})
+        tradition = meta.get("tradition", "Scripture")
+
         for chapter_i, verses_in_chapter in enumerate(chapter_counts, start=1):
             # chapter node
             chap_id = f"bible:{book_slug}:{chapter_i}"
@@ -35,7 +45,7 @@ def main():
                 "sources": [f"https://www.biblegateway.com/passage/?search={book_slug.title()}+{chapter_i}&version=ESV"],
                 "tags": ["scripture", "chapter", book_slug],
                 "gcb_layer": "Mirror",
-                "tradition": "Torah" if book_slug in ["genesis"] else "Gospels" if book_slug in ["matthew"] else "Apocalypse" if book_slug in ["revelation"] else "Scripture",
+                "tradition": tradition,
                 "created_at": ts,
                 "updated_at": ts,
                 "license": LICENSE,
@@ -58,7 +68,7 @@ def main():
                     "sources": [f"https://www.biblegateway.com/passage/?search={book_slug.title()}+{chapter_i}%3A{verse_i}&version=ESV"],
                     "tags": ["scripture", "verse", book_slug],
                     "gcb_layer": "Mirror",
-                    "tradition": chap_node["tradition"],
+                    "tradition": tradition,
                     "created_at": ts,
                     "updated_at": ts,
                     "license": LICENSE,
@@ -67,7 +77,7 @@ def main():
                 write_json(vfile, vnode)
                 created += 1
 
-    print(f"[OK] Generated {created} nodes into {OUT_DIR}")
+    print(f"[OK] Generated {created} nodes into {OUT_DIR} (skipped empty books: {skipped})")
 
 if __name__ == "__main__":
     main()
