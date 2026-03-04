@@ -1,0 +1,19 @@
+{
+  "kind": "node",
+  "id": "bible:revelation",
+  "type": "scripture_book",
+  "title": "Revelation",
+  "description": "Book of Revelation (Apocalypse). Apocalyptic visions centered on Christ’s victory, faithful endurance, and new creation.",
+  "sources": ["https://www.biblegateway.com/passage/?search=Revelation+1&version=ESV"],
+  "tags": ["Apocalypse", "endurance", "judgment", "new creation"],
+  "gcb_layer": "Fire",
+  "tradition": "Apocalypse",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0",
+  "meta": {
+    "abbr": "Rev",
+    "order": 66,
+    "testament": "New"
+  }
+}
