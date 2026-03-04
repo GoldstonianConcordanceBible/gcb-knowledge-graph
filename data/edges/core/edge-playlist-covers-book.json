@@ -1,0 +1,10 @@
+{
+  "kind": "edge",
+  "from_id": "yt:playlist:<PLAYLIST_ID>",
+  "to_id": "bible:genesis",
+  "relation": "covers",
+  "weight": 1,
+  "evidence": "Playlist title + description indicate Genesis coverage. Source: playlist URL.",
+  "created_at": "2026-03-04T00:00:00Z",
+  "meta": { "source": "https://www.youtube.com/playlist?list=<PLAYLIST_ID>" }
+}
