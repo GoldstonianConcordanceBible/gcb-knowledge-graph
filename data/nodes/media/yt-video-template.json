@@ -1,0 +1,19 @@
+{
+  "kind": "node",
+  "id": "yt:video:<VIDEO_ID>",
+  "type": "video",
+  "title": "Genesis 1:1–5 | Light and Order | GCB Bible Study",
+  "description": "Short-form teaching mapped to Scripture reference(s) and GCB layer tags for AI indexing.",
+  "sources": ["https://www.youtube.com/watch?v=<VIDEO_ID>"],
+  "tags": ["YouTube", "Short", "Genesis", "BibleStudy"],
+  "gcb_layer": "Mirror",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0",
+  "meta": {
+    "platform": "YouTube",
+    "channel": "Goldstonian Concordance Bible",
+    "duration_seconds": 60,
+    "scripture_refs": ["Genesis 1:1-5"]
+  }
+}
