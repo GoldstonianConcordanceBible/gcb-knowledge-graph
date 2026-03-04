@@ -1,5 +1,4 @@
 import json
-import os
 from pathlib import Path
 
 import yaml
@@ -10,24 +9,18 @@ SCHEMA_PATH = ROOT / "schema" / "gcbkg.schema.json"
 VOCAB_PATH = ROOT / "schema" / "vocab.yml"
 DATA_DIR = ROOT / "data"
 
-def load_schema():
-    with open(SCHEMA_PATH, "r", encoding="utf-8") as f:
-        schema = json.load(f)
-    return schema
+STRICT = True  # flip to False if you want to allow dangling edges temporarily
 
-def load_vocab():
-    with open(VOCAB_PATH, "r", encoding="utf-8") as f:
-        vocab = yaml.safe_load(f)
-    return vocab
+def load_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
 
 def iter_json_files(base: Path):
     for path in base.rglob("*.json"):
         yield path
 
 def main():
-    schema = load_schema()
-    vocab = load_vocab()
-
+    schema = load_json(SCHEMA_PATH)
+    vocab = yaml.safe_load(VOCAB_PATH.read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema)
 
     allowed_layers = set(vocab.get("gcb_layer", []))
@@ -37,10 +30,14 @@ def main():
     errors_found = False
     checked = 0
 
+    nodes_by_id = {}
+    edges = []
+
+    # First pass: schema validation + collect
     for path in iter_json_files(DATA_DIR):
         checked += 1
         try:
-            obj = json.loads(path.read_text(encoding="utf-8"))
+            obj = load_json(path)
         except Exception as e:
             print(f"[FAIL] {path}: invalid JSON ({e})")
             errors_found = True
@@ -55,16 +52,33 @@ def main():
             errors_found = True
             continue
 
-        # Light semantic checks using vocab
         if obj["kind"] == "node":
+            nid = obj["id"]
+            if nid in nodes_by_id:
+                print(f"[FAIL] Duplicate node id '{nid}' in {path}")
+                errors_found = True
+            nodes_by_id[nid] = path
+
             if obj["gcb_layer"] not in allowed_layers:
                 print(f"[FAIL] {path}: gcb_layer not in vocab.yml")
                 errors_found = True
             if obj["type"] not in allowed_node_types:
                 print(f"[WARN] {path}: type '{obj['type']}' not in vocab.yml node_types")
+
         elif obj["kind"] == "edge":
+            edges.append((obj, path))
             if obj["relation"] not in allowed_relations:
                 print(f"[WARN] {path}: relation '{obj['relation']}' not in vocab.yml relation_types")
+
+    # Second pass: referential integrity (dangling IDs)
+    if STRICT:
+        for edge, path in edges:
+            if edge["from_id"] not in nodes_by_id:
+                print(f"[FAIL] {path}: from_id '{edge['from_id']}' not found as node")
+                errors_found = True
+            if edge["to_id"] not in nodes_by_id:
+                print(f"[FAIL] {path}: to_id '{edge['to_id']}' not found as node")
+                errors_found = True
 
     if checked == 0:
         print("[WARN] No JSON files found under /data yet.")
@@ -72,7 +86,7 @@ def main():
     if errors_found:
         raise SystemExit(1)
 
-    print(f"[OK] Validation passed. Files checked: {checked}")
+    print(f"[OK] Validation passed. Files checked: {checked}, nodes: {len(nodes_by_id)}, edges: {len(edges)}")
 
 if __name__ == "__main__":
     main()
