@@ -1,0 +1,14 @@
+{
+  "kind": "node",
+  "id": "bible:revelation:21:1",
+  "type": "scripture_verse",
+  "title": "Revelation 21:1",
+  "description": "Vision of new heaven and new earth; the first has passed away.",
+  "sources": ["https://www.biblegateway.com/passage/?search=Revelation+21%3A1&version=ESV"],
+  "tags": ["Apocalypse", "new creation", "renewal"],
+  "gcb_layer": "Fire",
+  "tradition": "Apocalypse",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0"
+}
