@@ -1,0 +1,10 @@
+{
+  "kind": "edge",
+  "from_id": "bible:isaiah:65:17",
+  "to_id": "bible:revelation:21:1",
+  "relation": "cross_ref",
+  "weight": 0.95,
+  "evidence": "New heavens/new earth theme connects Isaiah 65:17 with Revelation 21:1.",
+  "created_at": "2026-03-04T00:00:00Z",
+  "meta": { "theme": "theme:new-creation" }
+}
