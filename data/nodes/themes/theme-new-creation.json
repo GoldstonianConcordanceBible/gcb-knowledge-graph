@@ -1,0 +1,13 @@
+{
+  "kind": "node",
+  "id": "theme:new-creation",
+  "type": "theme",
+  "title": "New Creation",
+  "description": "Biblical theme of renewed heavens and earth; God dwelling with His people; restoration rather than escape.",
+  "sources": ["https://www.biblegateway.com/passage/?search=Revelation+21&version=ESV"],
+  "tags": ["eschatology", "restoration", "hope", "kingdom"],
+  "gcb_layer": "Fire",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0"
+}
