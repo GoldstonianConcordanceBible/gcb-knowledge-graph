@@ -1,0 +1,10 @@
+{
+  "kind": "edge",
+  "from_id": "yt:video:<VIDEO_ID>",
+  "to_id": "bible:genesis:1:1",
+  "relation": "cites",
+  "weight": 0.9,
+  "evidence": "Video title/description indicates Genesis 1:1 reference.",
+  "created_at": "2026-03-04T00:00:00Z",
+  "meta": { "refs": ["Genesis 1:1"] }
+}
