@@ -18,22 +18,25 @@ node_types:
 relation_types:
   - contains
   - covers
+  - teaches
   - cites
   - cross_ref
   - alludes_to
   - fulfills
   - parallels
   - theme_of
-  - teaches
+  - mentions
+  - quotes
+  - context_for
   - supports
   - contradicts
-  - context_for
 
 traditions:
   - Torah
   - Prophets
   - Writings
   - Gospels
+  - Acts
   - Epistles
   - Apocalypse
   - SecondTemple
