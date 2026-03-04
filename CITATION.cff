@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "Goldstonian Concordance Bible Knowledge Graph (GCB-KG)"
+message: "If you use this knowledge graph, please cite it."
+type: software
+authors:
+  - family-names: "Goldston"
+    given-names: "Justin"
+    name-suffix: "PhD"
+repository-code: "https://github.com/GoldstonianConcordanceBible/gcb-knowledge-graph"
+license: "CC-BY-4.0"
+keywords:
+  - theology
+  - bible
+  - knowledge-graph
+  - biblical-studies
+  - open-education
+  - SydTek University
