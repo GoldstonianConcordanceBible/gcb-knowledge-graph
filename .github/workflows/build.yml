@@ -1,0 +1,39 @@
+name: Build Graph (Manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema pyyaml
+
+      - name: Validate
+        run: |
+          python pipelines/validate.py
+
+      - name: Optional ingest YouTube CSV
+        run: |
+          if [ -f pipelines/youtube_ingest.csv ]; then
+            python pipelines/ingest_youtube_csv.py
+          fi
+
+      - name: Resolve scripture refs
+        run: |
+          python pipelines/resolve_scripture_refs.py
+
+      - name: Export NDJSON
+        run: |
+          python pipelines/export_ndjson.py
