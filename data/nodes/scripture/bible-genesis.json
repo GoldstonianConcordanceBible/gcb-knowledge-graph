@@ -1,0 +1,19 @@
+{
+  "kind": "node",
+  "id": "bible:genesis",
+  "type": "scripture_book",
+  "title": "Genesis",
+  "description": "Book of Genesis (Torah). Foundational narratives of creation, covenant, and patriarchal origins.",
+  "sources": ["https://www.biblegateway.com/passage/?search=Genesis+1&version=ESV"],
+  "tags": ["Torah", "Pentateuch", "creation", "covenant", "patriarchs"],
+  "gcb_layer": "Mirror",
+  "tradition": "Torah",
+  "created_at": "2026-03-04T00:00:00Z",
+  "updated_at": "2026-03-04T00:00:00Z",
+  "license": "CC-BY-4.0",
+  "meta": {
+    "abbr": "Gen",
+    "order": 1,
+    "testament": "Old"
+  }
+}
