@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/gcbkg.schema.json",
+  "title": "GCB Knowledge Graph Schema",
+  "type": "object",
+  "required": ["kind"],
+  "oneOf": [
+    { "$ref": "#/$defs/node" },
+    { "$ref": "#/$defs/edge" }
+  ],
+  "$defs": {
+    "isoDateTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "type",
+        "title",
+        "description",
+        "sources",
+        "tags",
+        "gcb_layer",
+        "created_at",
+        "updated_at",
+        "license"
+      ],
+      "properties": {
+        "kind": { "const": "node" },
+        "id": { "type": "string", "minLength": 3 },
+        "type": { "type": "string" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 3 },
+          "minItems": 1
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "gcb_layer": {
+          "type": "string",
+          "enum": ["Mirror", "Water", "Fire"]
+        },
+        "tradition": { "type": "string" },
+        "created_at": { "$ref": "#/$defs/isoDateTime" },
+        "updated_at": { "$ref": "#/$defs/isoDateTime" },
+        "license": { "type": "string" },
+        "meta": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "kind",
+        "from_id",
+        "to_id",
+        "relation",
+        "weight",
+        "evidence",
+        "created_at"
+      ],
+      "properties": {
+        "kind": { "const": "edge" },
+        "from_id": { "type": "string", "minLength": 3 },
+        "to_id": { "type": "string", "minLength": 3 },
+        "relation": { "type": "string" },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence": { "type": "string", "minLength": 3 },
+        "created_at": { "$ref": "#/$defs/isoDateTime" },
+        "meta": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    }
+  }
+}
