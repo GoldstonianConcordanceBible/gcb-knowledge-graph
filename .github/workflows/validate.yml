@@ -24,3 +24,7 @@ jobs:
       - name: Validate nodes/edges
         run: |
           python pipelines/validate.py
+
+      - name: Export NDJSON
+        run: |
+          python pipelines/export_ndjson.py
